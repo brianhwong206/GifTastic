@@ -1,0 +1,32 @@
+.container {
+    margin:auto;
+    border: black dashed 1px;
+}
+
+.header{
+    text-align: center;
+    font-size: 3em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#characterButtons{
+    text-align: center;
+}
+
+#character-form{
+    text-align: center;
+}
+
+#characters{
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gif{
+    margin: 10px;
+}
+
+.btn {
+    margin: 5px;
+}

@@ -5,11 +5,11 @@ $(document).ready(function() {
     function showButtons(){
 
     $("#characterButtons").empty();
-    console.log("gifs cleared");
+    console.log("gifs cleared -- ready to go!");
 
     for (var i = 0; i <characterArray.length; i++) {
         var newButton = $("<button>"); // new button is created
-        //newButton.attr("class", "btn btn-primary");
+        newButton.attr("class", "btn btn-primary");
         newButton.attr("id", i); // new button's id attribute is assigned
         var characterString = characterArray[i]; // identifies the item within the array as a string
         characterString = characterString.replace(" ", "+") // replaces the space character with the + symbol to assist with API calling
@@ -37,11 +37,11 @@ $(document).ready(function() {
           .then(function(response) {
             var results = response.data; // variable assigned to hold the response.data from API call
                 for (var j = 0; j < results.length; j++) {
-                    //console.log(response.data[j]);
     
-                    var gifUrl = response.data[j].images.fixed_height_small.url; // stores the gif url into gifUrl variable
-                    var stillUrl = response.data[j].images.fixed_height_small_still.url // stores the still url into the stillUrl variable
+                    var gifUrl = response.data[j].images.original.url; // stores the gif url into gifUrl variable
+                    var stillUrl = response.data[j].images.original_still.url // stores the still url into the stillUrl variable
                     var gifRating = response.data[j].rating; // stores the rating variable
+                    var gifTitle = response.data[j].title;
     
                     var personImage = $("<img>"); // new variable personImage is img
                     personImage.attr("src", stillUrl); // src attribute is assign the stillUrl
@@ -50,9 +50,11 @@ $(document).ready(function() {
                     personImage.attr("rating",  gifRating);
                     personImage.attr("data-state", "still"); // data state assigned as still
                     personImage.addClass("gif"); // gif class added
-    
+
                     $("#characters").append(personImage);
-                    $("#characters").append(gifRating);
+                    $("#characters").append("<br> Title: " + gifTitle);
+                    $("#characters").append("<br> Rating: " + gifRating + "<br>");
+
                 };       
           });
     });
@@ -68,10 +70,12 @@ $(document).ready(function() {
             if (state === "still"){
                 $(this).attr("src", gif);
                 $(this).attr("data-state", "animate");
+                console.log("gif running");
             }
             else if (state === "animate"){
                 $(this).attr("src",still);
                 $(this).attr("data-state", "still");
+                console.log("gif stopped");
             };
     });
 
@@ -83,6 +87,7 @@ $(document).ready(function() {
             if (newCharacter.length > 0) { 
                 characterArray.push(newCharacter); // pushes newCharacter to the characterArray
                 console.log(characterArray);
+                console.log("New Character Added: " + newCharacter);
                 showButtons();
                 $("#character-input").val("");
             }
@@ -91,7 +96,7 @@ $(document).ready(function() {
             };
     });
 
-    // when page loads
+    // execute when page loads
     showButtons();
 
 });

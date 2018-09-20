@@ -1,21 +1,20 @@
 $(document).ready(function() {
 
-    var characterArray = ["Jerry Seinfeld", "George Constanza", "Cosmo Kramer", "Elaine Benes", "Frank Costanza", "Newman"]; // initial character array
+    var topics = ["Jerry Seinfeld", "George Constanza", "Cosmo Kramer", "Elaine Benes", "Frank Costanza", "Newman"]; // initial character array
     
     function showButtons(){
-
     $("#characterButtons").empty();
     console.log("gifs cleared -- ready to go!");
 
-    for (var i = 0; i <characterArray.length; i++) {
+    for (var i = 0; i <topics.length; i++) {
         var newButton = $("<button>"); // new button is created
         newButton.attr("class", "btn btn-primary");
         newButton.attr("id", i); // new button's id attribute is assigned
-        var characterString = characterArray[i]; // identifies the item within the array as a string
+        var characterString = topics[i]; // identifies the item within the array as a string
         characterString = characterString.replace(" ", "+") // replaces the space character with the + symbol to assist with API calling
         newButton.attr("data-value", characterString); // new button's data-value attribute is assigned
-        newButton.attr("value", characterArray[i]);// new button's value attribute is assigned
-        newButton.html(characterArray[i]); // new button's html display is assigned
+        newButton.attr("value", topics[i]);// new button's value attribute is assigned
+        newButton.html(topics[i]); // new button's html display is assigned
         $("#characterButtons").append(newButton); // appending the newly created button to the id characterButtons on html
         };
 
@@ -85,8 +84,8 @@ $(document).ready(function() {
 
         var newCharacter = $("#character-input").val().trim(); // new variable takes the inputted text trimmed value
             if (newCharacter.length > 0) { 
-                characterArray.push(newCharacter); // pushes newCharacter to the characterArray
-                console.log(characterArray);
+                topics.push(newCharacter); // pushes newCharacter to the topics
+                console.log(topics);
                 console.log("New Character Added: " + newCharacter);
                 showButtons();
                 $("#character-input").val("");
